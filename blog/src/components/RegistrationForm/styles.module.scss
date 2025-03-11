@@ -1,0 +1,81 @@
+@use '../../variables' as vars;
+
+.regForm {
+  padding: 48px 36.5px;
+  background-color: #fff;
+  width: fit-content;
+  margin: 0 auto;
+  margin-top: 59px;
+  margin-bottom: 240px;
+  border-radius: 3px;
+  box-shadow: 0px 0px 20px 12px rgb(0 0 0 / 8%);
+  h3 {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 21px;
+  }
+  label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    max-width: 280px;
+    line-height: 22px;
+    position: relative;
+  }
+  input {
+    outline: none;
+    padding: 5px;
+    border: 1px solid rgba(217, 217, 217, 1);
+    border-radius: 4px;
+    &[type='text'],
+    &[type='email'] {
+      margin-bottom: 15px;
+      width: 320px;
+      display: block;
+    }
+    &[type='checkbox'] {
+      margin: 0;
+      width: 16px;
+      height: 16px;
+    }
+    &::placeholder {
+      color: rgba(191, 191, 191, 1);
+    }
+  }
+
+  hr {
+    margin-bottom: 15px;
+    margin-top: 21px;
+    background-color: rgba(232, 232, 232, 1);
+    height: 1px;
+    border: none;
+  }
+
+  .confirm {
+    display: flex;
+    gap: 8px;
+    flex-direction: row-reverse;
+    justify-content: left;
+    align-items: start;
+    margin-bottom: 21px;
+  }
+
+  button {
+    width: 100%;
+    border: none;
+    background-color: rgba(24, 144, 255, 1);
+    color: white;
+    border-radius: 5px;
+    height: 40px;
+    margin-bottom: 8px;
+  }
+
+  .LoginLink {
+    font-size: 12px;
+    text-align: center;
+    a {
+      text-decoration: none;
+      color: rgba(24, 144, 255, 1);
+    }
+  }
+}

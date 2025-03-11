@@ -1,0 +1,57 @@
+@use '../../variables' as vars;
+
+.header {
+  color: vars.$heading-color;
+  width: 100%;
+  text-align: center;
+  height: 80px;
+  font-size: 18px;
+  background-color: #fff;
+  .container {
+    .link {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: vars.$heading-color;
+    }
+    height: 100%;
+    max-width: 1440px;
+    padding: 15px 22px;
+    display: flex;
+    justify-content: space-between;
+    .btnGroup {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      .userInfo {
+        img {
+          width: 46px;
+          height: 46px;
+          border-radius: 25px;
+        }
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 13px;
+      }
+      .link {
+        padding: 7px 18px;
+        background-color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        &[id='logOut'] {
+          border: 1px solid vars.$text-color;
+        }
+      }
+      .prime {
+        border: 1px solid vars.$success-color;
+        color: vars.$success-color;
+      }
+      .create {
+        padding: 4px;
+        font-size: 14px;
+      }
+    }
+  }
+}

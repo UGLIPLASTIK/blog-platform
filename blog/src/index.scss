@@ -1,0 +1,10 @@
+@use './reset.css';
+@use './variables' as vars;
+body {
+  font-family: Inter, sans-serif;
+  background-color: vars.$background;
+}
+
+button {
+  cursor: pointer;
+}

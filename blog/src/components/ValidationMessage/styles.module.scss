@@ -1,0 +1,8 @@
+@use '../../variables' as vars;
+
+.valMessage {
+  color: tomato;
+  font-size: 10px;
+  position: absolute;
+  transform: translateY(40px);
+}

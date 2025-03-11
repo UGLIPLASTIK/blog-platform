@@ -1,0 +1,12 @@
+@use '../../variables' as vars;
+
+.app {
+  main {
+    width: 100vw;
+    min-height: 100vh;
+    padding-bottom: 67px;
+    padding-top: 25px;
+    background-color: vars.$background;
+    text-align: center;
+  }
+}

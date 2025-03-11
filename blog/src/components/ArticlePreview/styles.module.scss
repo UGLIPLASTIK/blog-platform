@@ -1,0 +1,130 @@
+@use '../../variables' as vars;
+
+.articlePreview {
+  width: 70%;
+  background-color: white;
+  margin: 0 auto;
+  margin-bottom: 26px;
+  padding: 15px 15px;
+  position: relative;
+  text-align: left;
+  color: vars.$text-color;
+  font-size: 12px;
+  box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.15);
+
+  &__titleGroup {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 10px;
+    max-width: 54%;
+    h3 {
+      font-size: 20px;
+      font-weight: 400;
+      color: vars.$info-color;
+      word-break: break-word;
+    }
+    div {
+      position: absolute;
+      top: 0;
+      right: -45px;
+      div {
+        position: absolute;
+        left: -20px;
+        top: 3px;
+      }
+      .iconLike {
+        content: url('../../assets/like_icon.svg');
+        &:hover {
+          content: url('../../assets/like_icon_red.svg');
+        }
+      }
+      .iconLiked {
+        content: url('../../assets/like_icon_red.svg');
+        &:hover {
+          content: url('../../assets/like_icon.svg');
+        }
+      }
+    }
+  }
+  &__tags {
+    max-width: 65%;
+    color: vars.$text-color-secondary;
+    margin-bottom: 8px;
+    span {
+      cursor: pointer;
+      display: inline-block;
+      margin-bottom: 3px;
+      border: 1.5px solid vars.$text-color-secondary;
+      border-radius: 2px;
+      padding: 2px;
+      margin-right: 8px;
+      &:hover {
+        color: vars.$text-color;
+        border-color: vars.$text-color;
+      }
+    }
+  }
+  &__info {
+    position: absolute;
+    right: 15px;
+    display: flex;
+    .editBtns {
+      position: absolute;
+      display: flex;
+      gap: 12px;
+      transform: translateY(55px);
+      right: 0;
+      button {
+        background-color: #fff;
+        height: 31px;
+        border: 1px solid black;
+        border-radius: 5px;
+      }
+      .deleteBtn {
+        border-color: vars.$highlight-color;
+        color: vars.$highlight-color;
+        width: 75px;
+      }
+      .editBtn {
+        border-color: vars.$success-color;
+        width: 65px;
+        text-decoration: none;
+        color: vars.$success-color;
+      }
+    }
+    .articlePreview__text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-right: 12px;
+      .name {
+        color: vars.$heading-color;
+        font-size: 18px;
+      }
+      .date {
+        color: vars.$text-color-secondary;
+      }
+    }
+    img {
+      width: 46px;
+      height: 46px;
+      border-radius: 25px;
+    }
+  }
+  .description {
+    max-width: 65%;
+    margin-bottom: 25px;
+    word-break: break-word;
+  }
+
+  .descriptionInFull {
+    color: vars.$text-color-secondary;
+  }
+
+  .textBody {
+    margin-top: 25px;
+  }
+  .hidden {
+    display: none;
+  }
+}

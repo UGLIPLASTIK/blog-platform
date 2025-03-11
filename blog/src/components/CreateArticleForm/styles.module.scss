@@ -1,0 +1,64 @@
+@use '../../variables' as vars;
+
+.creatingForm {
+  width: 70vw;
+  margin: 30px auto;
+  padding: 48px 32px;
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0px 0px 20px 12px rgb(0 0 0 / 8%);
+  font-size: 14px;
+  h2 {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  button {
+    height: 40px;
+    border: none;
+    border-radius: 4px;
+    background-color: rgba(24, 144, 255, 1);
+    width: 320px;
+    color: #fff;
+    font-size: 16px;
+  }
+  input,
+  textarea {
+    &::placeholder {
+      color: rgba(191, 191, 191, 1);
+    }
+    font-size: 16px;
+    margin-bottom: 21px;
+    outline: none;
+    border: 1px solid vars.$input-color;
+    border-radius: 4px;
+    width: 100%;
+    height: 40px;
+    resize: none;
+  }
+  .tags {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 21px;
+    .tag {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 17px;
+      input {
+        max-width: 300px;
+        margin: 0;
+      }
+      button {
+        width: 118px;
+        border: 1px solid vars.$highlight-color;
+        background-color: #fff;
+        color: vars.$highlight-color;
+      }
+      button[id='add-tag-button'] {
+        color: vars.$info-color;
+        border-color: vars.$info-color;
+      }
+    }
+  }
+}
