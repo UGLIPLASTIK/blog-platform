@@ -34,15 +34,9 @@
       }
       .iconLike {
         content: url('../../assets/like_icon.svg');
-        &:hover {
-          content: url('../../assets/like_icon_red.svg');
-        }
       }
       .iconLiked {
         content: url('../../assets/like_icon_red.svg');
-        &:hover {
-          content: url('../../assets/like_icon.svg');
-        }
       }
     }
   }

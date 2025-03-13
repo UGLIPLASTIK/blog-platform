@@ -62,7 +62,6 @@ export const updateUser = createAsyncThunk(
         throw new Error(errorData.errors?.message || "Can't update user.");
       }
       const data = await response.json();
-      console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -121,7 +120,6 @@ const authSlice = createSlice({
       .addCase(updateUser.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload.user;
-        console.log(action.payload.user);
       })
       .addCase(updateUser.rejected, (state) => {
         state.loading = false;

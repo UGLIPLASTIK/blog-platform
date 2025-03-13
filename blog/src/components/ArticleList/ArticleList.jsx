@@ -5,13 +5,10 @@ import { Link } from 'react-router-dom';
 import { articles, changePage, fetchArticles, pagination } from '../../store/article-slice';
 import ArticlePreview from '../ArticlePreview';
 import styles from './styles.module.scss';
-import { user } from '../../store/auth-slice.js';
 
 const ArticleList = () => {
   const dispatch = useDispatch();
   const paginationSettings = useSelector(pagination);
-  const userState = useSelector(user);
-  console.log(userState);
 
   useEffect(() => {
     dispatch(fetchArticles(paginationSettings.offset));

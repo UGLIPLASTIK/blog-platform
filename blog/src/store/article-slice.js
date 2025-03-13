@@ -78,12 +78,9 @@ export const deleteArticle = createAsyncThunk(
 export const toggleFavoriteArticle = createAsyncThunk(
   'articles/makeFavorite',
   async function (payload, { rejectWithValue, getState }) {
-    console.log(payload);
     const { slug, favorited } = payload;
-    console.log(favorited);
     const token = getState().authentication.user.token;
-    const method = favorited ? 'DELETE' : 'POST';
-    console.log(method);
+    const method = favorited ? 'POST' : 'DELETE';
     try {
       const response = await fetch(`https://blog-platform.kata.academy/api/articles/${slug}/favorite`, {
         method: method,
@@ -149,9 +146,9 @@ const articleSlice = createSlice({
       .addCase(toggleFavoriteArticle.pending, (state) => {
         state.loading = true;
       })
-      .addCase(toggleFavoriteArticle.fulfilled, (state, action) => {
+      .addCase(toggleFavoriteArticle.fulfilled, (state) => {
         state.loading = false;
-        state.chosenArticle = action.payload.article;
+        // state.chosenArticle = action.payload.article;
       })
       .addCase(toggleFavoriteArticle.rejected, (state) => {
         state.loading = false;

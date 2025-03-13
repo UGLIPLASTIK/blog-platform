@@ -1,6 +1,7 @@
 import { Popconfirm } from 'antd';
 import { format } from 'date-fns';
-import PropTypes, { func, arrayOf, bool, number, object, string } from 'prop-types';
+import PropTypes, { arrayOf, bool, number, object, string } from 'prop-types';
+import { useEffect, useRef, useState } from 'react';
 import Markdown from 'react-markdown';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -8,35 +9,28 @@ import avatar from '../../assets/avatar_default.png';
 import { deleteArticle, toggleFavoriteArticle } from '../../store/article-slice';
 import { startEdit } from '../../store/editor-slice';
 import styles from './styles.module.scss';
-const LikeCounter = ({ count, favorited, toogleFh, slug }) => {
-  const dispatch = useDispatch();
-  return (
-    <div>
-      <div
-        onClick={() => {
-          // e.stopPropagation();
-          dispatch(toogleFh({ slug: slug, favorited: favorited }));
-        }}
-        className={!favorited ? styles.iconLike : styles.iconLiked}
-      ></div>
-      <span>{count}</span>
-    </div>
-  );
-};
-
-LikeCounter.propTypes = {
-  count: number.isRequired,
-  favorited: bool.isRequired,
-  toogleFh: func.isRequired,
-  slug: string.isRequired,
-};
 
 const ArticlePreview = ({ article, user, body = false }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { title, description, author, updatedAt, tagList = [], favoritesCount, favorited, slug } = article;
+  const [like, setLike] = useState(favorited);
+  const [count, setCount] = useState(favoritesCount);
   const date = format(updatedAt, 'MMMM d, yyyy');
   const owner = user?.username === author.username;
+  const likeRef = useRef(like);
+
+  useEffect(() => {
+    likeRef.current = like;
+  }, [like]);
+
+  useEffect(() => {
+    return () => {
+      if (likeRef.current !== favorited) {
+        dispatch(toggleFavoriteArticle({ slug: slug, favorited: likeRef.current }));
+      }
+    };
+  }, []);
 
   return (
     <div className={styles.articlePreview}>
@@ -75,7 +69,16 @@ const ArticlePreview = ({ article, user, body = false }) => {
 
       <div className={styles.articlePreview__titleGroup}>
         <h3>{title}</h3>
-        <LikeCounter count={favoritesCount} favorited={favorited} toogleFh={toggleFavoriteArticle} slug={slug} />
+        <div>
+          <div
+            onClick={() => {
+              setLike(!like);
+              setCount(like ? count - 1 : count + 1);
+            }}
+            className={!like ? styles.iconLike : styles.iconLiked}
+          ></div>
+          <span>{count}</span>
+        </div>
       </div>
 
       <div className={styles.articlePreview__tags}>
