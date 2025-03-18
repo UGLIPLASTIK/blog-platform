@@ -1,7 +1,7 @@
 import { Popconfirm } from 'antd';
 import { format } from 'date-fns';
 import PropTypes, { arrayOf, bool, number, object, string } from 'prop-types';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import Markdown from 'react-markdown';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -18,19 +18,6 @@ const ArticlePreview = ({ article, user, body = false }) => {
   const [count, setCount] = useState(favoritesCount);
   const date = format(updatedAt, 'MMMM d, yyyy');
   const owner = user?.username === author.username;
-  const likeRef = useRef(like);
-
-  useEffect(() => {
-    likeRef.current = like;
-  }, [like]);
-
-  useEffect(() => {
-    return () => {
-      if (likeRef.current !== favorited) {
-        dispatch(toggleFavoriteArticle({ slug: slug, favorited: likeRef.current }));
-      }
-    };
-  }, []);
 
   return (
     <div className={styles.articlePreview}>
@@ -74,6 +61,7 @@ const ArticlePreview = ({ article, user, body = false }) => {
             onClick={() => {
               setLike(!like);
               setCount(like ? count - 1 : count + 1);
+              dispatch(toggleFavoriteArticle({ slug: slug, favorited: like }));
             }}
             className={!like ? styles.iconLike : styles.iconLiked}
           ></div>

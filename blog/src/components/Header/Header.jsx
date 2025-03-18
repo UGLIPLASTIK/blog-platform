@@ -43,9 +43,9 @@ const Header = () => {
         >
           Create article
         </Link>
-        <Link to="/profile-editor">
+        <Link className={styles.link} to="/profile-editor">
           <div className={styles.userInfo}>
-            <span className={styles.userInfo__name}>{userState.username}</span>
+            <span>{userState.username}</span>
             <img src={userState.image ? userState.image : avatar} alt="avatar" />
           </div>
         </Link>

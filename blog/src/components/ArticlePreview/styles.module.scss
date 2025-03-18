@@ -109,10 +109,12 @@
     max-width: 65%;
     margin-bottom: 25px;
     word-break: break-word;
+    text-decoration: none;
   }
 
   .descriptionInFull {
     color: vars.$text-color-secondary;
+    text-decoration: none;
   }
 
   .textBody {

@@ -61,7 +61,6 @@ const CreateArticleForm = () => {
   const navigate = useNavigate();
   const editStatus = useSelector(editing);
   const [tags, setTags] = useState(editStatus ? editedArticle.tagList : []);
-  console.log(editStatus);
 
   const {
     getValues,
@@ -72,7 +71,7 @@ const CreateArticleForm = () => {
 
   useEffect(() => {
     if (!newArticleStatus) return;
-    navigate(`/articles/${newArticleStatus.article.slug}`);
+    navigate(`/articles`);
     return () => {
       dispatch(resetState());
     };
@@ -81,28 +80,28 @@ const CreateArticleForm = () => {
   const onSubmit = () => {
     const requestBody = {
       article: {
-        title: getValues('title'),
-        description: getValues('description'),
-        body: getValues('text'),
+        title: getValues('title').trim(),
+        description: getValues('description').trim(),
+        body: getValues('text').trim(),
         tagList: tags,
       },
     };
-    console.log(requestBody);
     if (editStatus) {
-      console.log('onEdit');
       dispatch(updateArticle({ slug: editedArticle.slug, body: requestBody }));
     } else {
-      console.log('onCreate');
       dispatch(createArticle(requestBody));
     }
   };
+
+  const validate = { noOnlySpaces: (value) => value.trim().length > 0 || 'Description cannot consist of only spaces' };
 
   const handleDeleteTag = (tag) => setTags((prev) => prev.filter((t) => t !== tag));
   const titleError = errors.title?.message;
   const descriptionError = errors.description?.message;
   const textError = errors.text?.message;
 
-  const positionMessage = { translateY: '-18px' };
+  const positionMessage = { transform: 'translateY(-18px)' };
+
   if (loadingStatus) return <p>Loading...</p>;
 
   return (
@@ -118,6 +117,7 @@ const CreateArticleForm = () => {
             placeholder="Title"
             {...register('title', {
               required: 'This field is required',
+              validate: validate,
             })}
           />
           {titleError && <ValidationMessage style={positionMessage} message={titleError} />}
@@ -131,6 +131,7 @@ const CreateArticleForm = () => {
             placeholder="Description"
             {...register('description', {
               required: 'This field is required',
+              validate: validate,
             })}
           />
           {descriptionError && <ValidationMessage style={positionMessage} message={descriptionError} />}
@@ -143,6 +144,11 @@ const CreateArticleForm = () => {
             placeholder="Text"
             {...register('text', {
               required: 'This field is required',
+              validate: validate,
+              maxLength: {
+                value: 5000,
+                message: 'The text must not exceed 5000 characters',
+              },
             })}
           />
           {textError && <ValidationMessage style={positionMessage} message={textError} />}
