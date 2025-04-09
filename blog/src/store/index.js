@@ -5,22 +5,18 @@ import authReducer from './auth-slice';
 import articleReducer from './article-slice';
 import editorReducer from './editor-slice';
 
-// Трансформер для сохранения только пагинации
 const paginationTransform = createTransform(
-  // Функция `in` — вызывается перед сохранением в хранилище
   (inboundState, key) => {
     if (key === 'articles') {
-      // Сохраняем только пагинацию
       return {
         pagination: inboundState.pagination,
       };
     }
     return inboundState;
   },
-  // Функция `out` — вызывается после извлечения из хранилища
+
   (outboundState, key) => {
     if (key === 'articles') {
-      // Восстанавливаем только пагинацию, остальные поля оставляем по умолчанию
       return {
         ...outboundState,
         chosenArticle: null,
@@ -31,7 +27,7 @@ const paginationTransform = createTransform(
     }
     return outboundState;
   },
-  // Указываем, для какого редюсера применяется трансформер
+
   { whitelist: ['articles'] }
 );
 
