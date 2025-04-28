@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 export const fetchArticles = createAsyncThunk(
   'articles/fetchArticles',
@@ -11,7 +12,7 @@ export const fetchArticles = createAsyncThunk(
       if (token) {
         headers.Authorization = `Token ${token}`;
       }
-      const response = await fetch(`https://blog-platform.kata.academy/api/articles/?offset=${offset}&limit=5`, {
+      const response = await fetch(`${baseUrl}/articles/?offset=${offset}&limit=5`, {
         method: 'GET',
         headers,
       });
@@ -37,7 +38,7 @@ export const fetchArticle = createAsyncThunk(
       if (token) {
         headers.Authorization = `Token ${token}`;
       }
-      const response = await fetch(`https://blog-platform.kata.academy/api/articles/${slug}`, {
+      const response = await fetch(`${baseUrl}/articles/${slug}`, {
         method: 'GET',
         headers,
       });
@@ -57,7 +58,7 @@ export const deleteArticle = createAsyncThunk(
   async function (slug, { rejectWithValue, getState }) {
     const token = getState().authentication.user.token;
     try {
-      const response = await fetch(`https://blog-platform.kata.academy/api/articles/${slug}`, {
+      const response = await fetch(`${baseUrl}/articles/${slug}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -82,7 +83,7 @@ export const toggleFavoriteArticle = createAsyncThunk(
     const token = getState().authentication.user.token;
     const method = !favorited ? 'POST' : 'DELETE';
     try {
-      const response = await fetch(`https://blog-platform.kata.academy/api/articles/${slug}/favorite`, {
+      const response = await fetch(`${baseUrl}articles/${slug}/favorite`, {
         method: method,
         headers: {
           'Content-Type': 'application/json',

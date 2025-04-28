@@ -1,10 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 export const registerNewUser = createAsyncThunk(
   'authentication/registerUser',
   async function (user, { rejectWithValue }) {
     try {
-      const response = await fetch(`https://blog-platform.kata.academy/api/users`, {
+      const response = await fetch(`${baseUrl}/users`, {
         body: JSON.stringify(user),
         method: 'POST',
         headers: {
@@ -25,7 +26,7 @@ export const registerNewUser = createAsyncThunk(
 
 export const loginUser = createAsyncThunk('authentication/loginUser', async function (user, { rejectWithValue }) {
   try {
-    const response = await fetch(`https://blog-platform.kata.academy/api/users/login`, {
+    const response = await fetch(`${baseUrl}/login`, {
       body: JSON.stringify(user),
       method: 'POST',
       headers: {
@@ -49,7 +50,7 @@ export const updateUser = createAsyncThunk(
     const token = getState().authentication.user.token;
 
     try {
-      const response = await fetch(`https://blog-platform.kata.academy/api/user`, {
+      const response = await fetch(`${baseUrl}/user`, {
         body: JSON.stringify({ user: userData }),
         method: 'PUT',
         headers: {

@@ -3,16 +3,18 @@ import { format } from 'date-fns';
 import PropTypes, { arrayOf, bool, number, object, string } from 'prop-types';
 import { useState } from 'react';
 import Markdown from 'react-markdown';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import avatar from '../../assets/avatar_default.png';
 import { deleteArticle, toggleFavoriteArticle } from '../../store/article-slice';
 import { startEdit } from '../../store/editor-slice';
 import styles from './styles.module.scss';
+import { user as authUser } from '../../store/auth-slice';
 
 const ArticlePreview = ({ article, user, body = false }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isAuth = useSelector(authUser);
   const { title, description, author, updatedAt, tagList = [], favoritesCount, favorited, slug } = article;
   const [like, setLike] = useState(favorited);
   const [count, setCount] = useState(favoritesCount);
@@ -59,6 +61,7 @@ const ArticlePreview = ({ article, user, body = false }) => {
         <div>
           <div
             onClick={() => {
+              if (!isAuth) navigate('/sign-in');
               setLike(!like);
               setCount(like ? count - 1 : count + 1);
               dispatch(toggleFavoriteArticle({ slug: slug, favorited: like }));

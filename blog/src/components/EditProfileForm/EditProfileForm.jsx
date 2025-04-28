@@ -34,7 +34,6 @@ const EditProfileForm = () => {
     };
     dispatch(updateUser(newUserData));
   };
-  // console.log(userState.token);
 
   return (
     <div className={styles.editProfileForm}>

@@ -1,11 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 export const createArticle = createAsyncThunk(
   'editor/createArticle',
   async function (article, { getState, rejectWithValue }) {
     const token = getState().authentication.user.token;
     try {
-      const response = await fetch(`https://blog-platform.kata.academy/api/articles`, {
+      const response = await fetch(`${baseUrl}/articles`, {
         body: JSON.stringify(article),
         method: 'POST',
         headers: {
@@ -33,7 +34,7 @@ export const updateArticle = createAsyncThunk(
     const token = getState().authentication.user.token;
     try {
       console.log('starting update');
-      const response = await fetch(`https://blog-platform.kata.academy/api/articles/${slug}`, {
+      const response = await fetch(`${baseUrl}/articles/${slug}`, {
         body: JSON.stringify(body),
         method: 'PUT',
         headers: {
